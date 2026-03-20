@@ -8,31 +8,33 @@ huskylens.init_i2c()
 huskylens.init_mode(protocolAlgorithm.OBJECTCLASSIFICATION)
 huskylens.clear_osd()
 radio.set_group(9)
+
 basic.show_icon(IconNames.HEART)
 basic.clear_screen()
 
 def on_forever():
     huskylens.request()
-    # Only send data when button A is pressed
+    
     if input.button_is_pressed(Button.A):
         if huskylens.is_appear(1, HUSKYLENSResultType_t.HUSKYLENS_RESULT_BLOCK):
-            radio.send_value("input1", 1001)
+            radio.send_value("input1", 1)
             basic.show_string("P")
             basic.pause(1000)
             basic.clear_screen()
         elif huskylens.is_appear(2, HUSKYLENSResultType_t.HUSKYLENS_RESULT_BLOCK):
-            radio.send_value("input1", 1002)
+            radio.send_value("input1", 2)
             basic.show_string("C")
             basic.pause(1000)
             basic.clear_screen()
         elif huskylens.is_appear(3, HUSKYLENSResultType_t.HUSKYLENS_RESULT_BLOCK):
-            radio.send_value("input1", 1003)
+            radio.send_value("input1", 3)
             basic.show_string("CB")
             basic.pause(1000)
             basic.clear_screen()
         else:
-            radio.send_value("input1", 1004)
+            radio.send_value("input1", 4)
             basic.show_string("G")
             basic.pause(1000)
             basic.clear_screen()
+
 basic.forever(on_forever)
